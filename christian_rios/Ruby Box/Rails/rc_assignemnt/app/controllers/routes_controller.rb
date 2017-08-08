@@ -15,12 +15,12 @@ class RoutesController < ApplicationController
   end
 
   def visits
-    session[:count]
+    session[:count] ||= 0
     render text: "You have visited this page #{session[:count] += 1} times."
   end
 
   def restart
-    session[:count] = 0
+    reset_session
     render text: "Destroyed the session!"
   end
 end
