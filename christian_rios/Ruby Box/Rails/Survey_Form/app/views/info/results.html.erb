@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Result</title>
+  </head>
+  <body>
+    <div class="container">
+      <p style="background-color: green; color: white;"><%= flash[:success] %></p>
+      <h3 style="text-decoration: underline;">Submitted Information</h3>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Name:</td>
+            <td><%= @info['name'] %></td>
+          </tr>
+          <tr>
+            <td>Dojo Location:</td>
+            <td><%= @info['location'] %></td>
+          </tr>
+          <tr>
+            <td>Favorite Language:</td>
+            <td><%= @info['language'] %></td>
+          </tr>
+          <tr>
+            <td>Comment:</td>
+            <td><%= @info['comment'] %></td>
+          </tr>
+        </tbody>
+      </table>
+      <form action="/" method="get">
+        <button type="submit" style="float: right;" class="btn btn-primary">Go Back</button>
+      </form>
+    </div>
+  </body>
+</html>

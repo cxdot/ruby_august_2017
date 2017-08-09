@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Survey Form</title>
+  </head>
+  <body>
+    <div class="container">
+    <form action="/submit_info" method="post">
+      <input type="hidden" name="authenticity_token" value="VxLCoqvap2IdbFioGuFfTadt+I5jVDPKxwg+6/1wPZIXUHTPyQzAq6Bat6MXlSF9HYrxQN3aXSZWZqJPMf2HOw==" />
+      <div class="form-group">
+        <label>Your name:</label>
+        <input type="text" name="info[name]" class="form-control">
+      </div>
+        <div class="form-group">
+          <label>Dojo Location:</label>
+          <select name="info[location]" class="form-control">
+            <option>Dallas, TX</option>
+            <option>Seattle, WA</option>
+            <option>Tulsa, OK</option>
+            <option>Los Angeles, CA</option>
+          </select>
+      </div>
+        <div class="form-group">
+          <label>Favorite Language:</label>
+          <select name="info[language]" class="form-control">
+            <option>Python</option>
+            <option>MEAN</option>
+            <option>Java</option>
+            <option>Swift</option>
+          </select>
+      </div>
+      <div class="form-group">
+        <label>Comment (optional):</label>
+        <textarea class="form-control" rows="5" name="info[comment]"></textarea>
+      </div>
+      <button style="float: right;" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  </body>
+</html>
