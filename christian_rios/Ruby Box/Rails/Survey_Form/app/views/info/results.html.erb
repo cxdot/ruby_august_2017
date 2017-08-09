@@ -22,10 +22,14 @@
             <td>Favorite Language:</td>
             <td><%= @info['language'] %></td>
           </tr>
+          <% if @info['comment'] != "" %>
           <tr>
             <td>Comment:</td>
-            <td><%= @info['comment'] %></td>
+            <td>
+              <%= @info['comment'] %>
+            </td>
           </tr>
+          <% end %>
         </tbody>
       </table>
       <form action="/" method="get">

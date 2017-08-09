@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>Your gold: <%= @gold %></h2>
+        <form action="/reset" method="post">
+          <input type="hidden" name="authenticity_token" value="j/DcoJ2VZvr7vdf8CHKsvjdlDbmiizaOb5B8DMALg6s=" >
+          <button type="submit" class="btn btn-success">Start Over</button>
+        </form>
+      </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <form action="/process" method="post">
+              <input type="hidden" name="authenticity_token" value="j/DcoJ2VZvr7vdf8CHKsvjdlDbmiizaOb5B8DMALg6s=" >
+              <input type="hidden" name="area" value="farm">
+              <h3>Farm</h3>
+              <p>(earns 10-20 golds)</p>
+              <button type="submit" class="btn btn-warning">Find Golds</button>
+            </form>
+          </div>
+          <div class="col-sm-3">
+            <form action="/process" method="post">
+              <input type="hidden" name="authenticity_token" value="j/DcoJ2VZvr7vdf8CHKsvjdlDbmiizaOb5B8DMALg6s=" >
+              <input type="hidden" name="area" value="cave">
+              <h3>Cave</h3>
+              <p>(earns 5-10 golds)</p>
+              <button type="submit" class="btn btn-warning">Find Golds</button>
+            </form>
+          </div>
+          <div class="col-sm-3">
+            <form action="/process" method="post">
+              <input type="hidden" name="authenticity_token" value="j/DcoJ2VZvr7vdf8CHKsvjdlDbmiizaOb5B8DMALg6s=" >
+              <input type="hidden" name="area" value="house">
+              <h3>House</h3>
+              <p>(earns 2-5 golds)</p>
+              <button type="submit" class="btn btn-warning">Find Golds</button>
+            </form>
+          </div>
+          <div class="col-sm-3">
+            <form action="/process" method="post">
+              <input type="hidden" name="authenticity_token" value="j/DcoJ2VZvr7vdf8CHKsvjdlDbmiizaOb5B8DMALg6s=" >
+              <input type="hidden" name="area" value="casino">
+              <h3>Casino</h3>
+              <p>(earns/takes 0-50 golds)</p>
+              <button type="submit" class="btn btn-warning">Find Golds</button>
+            </form>
+          </div>
+        </div>
+        <h4>Activities:</h4>
+        <div class="pre-scrollable">
+          <% if @activities != nil %>
+          <% @activities.reverse.each do |element| %>​
+    				<% if element.include?("Earned") %>​
+    					<p class="earned"><%= element %></p>​
+    				<% else %>​
+    					<p class="lost"><%= element %></p>​
+    				<% end %>​
+    			<% end %>​
+    			<% end %>​
+        </div>
+    </div>
+  </body>
+</html>
