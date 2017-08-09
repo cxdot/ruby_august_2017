@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h3>Current time and date:</h3>
+    <div>
+      <p> <%= @time.strftime('%b, %d, %Y') %> </p>
+    </div>
+    <div>
+      <p> <%= @time.strftime('%I, %M, %p') %> </p>
+    </div>
+  </body>
+</html>
