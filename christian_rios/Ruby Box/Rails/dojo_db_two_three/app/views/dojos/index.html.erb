@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dojo Dashboard</title>
+  </head>
+  <body>
+  <div class="container">
+    <% if flash[:notice] %>
+	   <h4 class="success"><%= flash[:notice] %></h4>
+    <% end %>
+    <h2>Listing Dojos</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Coding Dojo Branch</th>
+          <th>Street</th>
+          <th>City</th>
+          <th>State</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @dojos.each do |dojo| %>​​
+        <tr>
+          <td><%= dojo.branch %></td>
+          <td><%= dojo.street %></td>
+          <td><%= dojo.city %></td>
+          <td><%= dojo.state %></td>
+          <td>
+          <form action="/show/<%= dojo.id %>" method="get">
+            <button type="submit" class="btn btn-info">Show</button>
+          </form>
+          </td>
+          <td>
+          <form action="/edit/<%= dojo.id %>" method="get">
+            <button type="submit" class="btn btn-info">Edit</button>
+          </form>
+          </td>
+          <td>
+          <form action="/remove/<%= dojo.id %>" method="post">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+            <button type="submit" class="btn btn-warning">Delete</button>
+          </form>
+          </td>
+        </tr>
+      <% end %>​
+      </tbody>
+    </table>
+    <form action="/new_dojo" method="get">
+      <button type="submit" class="btn btn-primary">New Dojo</button>
+    </form>
+  </div>
+  </body>
+</html>

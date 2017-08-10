@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="container">
+  <h2><%= @dojo.branch %></h2>
+  <form action="/" method="get">
+    <button type="submit" class="btn btn-success">Home</button>
+  </form>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Coding Dojo Branch</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>State</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @dojo.branch %></td>
+        <td><%= @dojo.street %></td>
+        <td><%= @dojo.city %></td>
+        <td><%= @dojo.state %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  </body>
+</html>

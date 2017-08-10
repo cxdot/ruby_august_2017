@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="container">
+      <form action="/edit_dojo/<%= @dojo.id %>" method="post">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+        <input name="_method" type="hidden" value="patch" />
+        <div class="form-group">
+          <label>Branch:</label>
+          <input type="text" class="form-control" name="dojo[branch]" value="<%= @dojo.branch %>">
+        </div>
+        <div class="form-group">
+          <label>Street:</label>
+          <input type="text" class="form-control" name="dojo[street]" value="<%= @dojo.street %>">
+        </div>
+        <div class="form-group">
+          <label>City:</label>
+          <input type="text" class="form-control" name="dojo[city]" value="<%= @dojo.city %>">
+        </div>
+        <div class="form-group">
+          <label>State:</label>
+          <input type="text" class="form-control" name="dojo[state]" value="<%= @dojo.state %>">
+        </div>
+        <button type="submit" class="btn btn-warning">Edit Information</button>
+      </form>
+      <form action="/" method="get">
+        <button type="submit" class="btn btn-danger">Cancel</button>
+      </form>
+    </div>
+  </body>
+</html>
