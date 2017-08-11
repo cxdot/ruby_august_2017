@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="container">
+      <% if flash[:errors] %>
+	        <% flash[:errors].each do |e| %>
+		        <p class="errors"><%= e %></p>
+	        <% end %>
+      <% end %>
+      <form action="/dojo/<%= @dojo.id %>" method="post">
+      <input type="hidden" name="authenticity_token" value="j/DcoJ2VZvr7vdf8CHKsvjdlDbmiizaOb5B8DMALg6s=" >
+      <div class="form-group">
+          <label>First Name:</label>
+          <input type="text" class="form-control" name="student[first_name]">
+      </div>
+      <div class="form-group">
+          <label>Last Name:</label>
+          <input type="text" class="form-control" name="student[last_name]">
+      </div>
+      <div class="form-group">
+          <label>Email:</label>
+          <input type="email" class="form-control" name="student[email]">
+      </div>
+      <div class="dropdown">
+        <label>Dojo:</label>
+        <select name="student[dojo_id]">
+          <% @dojos.each do |i| %>
+           <% if i == @dojo %>
+              <option selected value="<%= i.id %>"><%= i.branch %></option>
+           	<% else %>
+           	  <option value="<%= i.id %>"><%= i.branch %></option>
+            <% end %>
+          <% end %>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-default">Create Student</button>
+      </form>
+    </div>
+  </body>
+</html>

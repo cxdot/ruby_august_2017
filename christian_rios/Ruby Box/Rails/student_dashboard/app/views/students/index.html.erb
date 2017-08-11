@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dojo</title>
+  </head>
+  <body>
+    <div class="container">
+      <% if flash[:notice] %>
+	     <h3 class="success"><%= flash[:notice] %></h3>
+      <% end %>
+      <h2><%= @dojo.branch %></h2>
+      <h3><%= @dojo.street %></h3>
+      <h3>City: <%= @dojo.city %> State: <%= @dojo.state %></h3>
+      <h3>Student Roster</h3>
+      <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th class="col-xs-2">First Name</th>
+          <th class="col-xs-2">Last Name</th>
+          <th class="col-xs-2">Email</th>
+          <th class="col-xs-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% unless @students == nil %>
+        <% @students.each do |i| %>
+        <tr>
+          <td><%= i.first_name %></td>
+          <td><%= i.last_name %></td>
+          <td><%= i.email %></td>
+          <td>
+            <form action="/show/:id" method="get">
+              <button type="submit" class="btn btn-xs">Show</button>
+            </form>
+            <form action="/dojos/<%= i.dojo_id %>/students/<%= i.student_id %>" method="get">
+              <button type="submit" class="btn btn-xs">Edit</button>
+            </form>
+            <form action="/remove/<%= i.student_id %>" method="post">
+              <input type="hidden" name="authenticity_token" value="j/DcoJ2VZvr7vdf8CHKsvjdlDbmiizaOb5B8DMALg6s=" >
+              <button type="submit" class="btn btn-xs">Destroy</button>
+            </form>
+          </td>
+        </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <form action="/dojos/<%= @dojo.id %>/students/new" method="get">
+      <button type="submit" class=" btn btn-primary">Add Student</button>
+    </form>
+    </div>
+  </body>
+</html>
