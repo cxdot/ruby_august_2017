@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><% title "Your Dashboard" %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+    <body>
+        <div class="container">
+            <div>
+                <h4>Hi <%= @user.first_name %></h4>
+                <%= link_to "Go To All Products", shoes_path %>
+                <a style="float: right;" href="/logout" data-method="delete">Logout</a>
+            </div><p></p>
+            <!-- begin create shoe for sale-->
+            <div>
+                <p>Sell product:</p>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="email" class="form-control" name=""shoe[name] id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount:</label>
+                        <input type="password" class="form-control" name="shoe[amount]" id="amount">
+                    </div>
+                    <button type="submit" class="btn btn-default">Sell</button>
+                </form>
+            </div><p></p>
+            <!-- end create shoe for sale-->
+
+            <!-- Products not sold-->
+            <div>
+                <h4>Your products that are not sold yet:</h4>            
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Date Posted</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>        
+            <!-- Products not sold end-->
+
+            <!-- Sales begin-->
+            <div>
+                <h4>Sales:</h4>            
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Date Bought</th>
+                        <th>Buyer</th>
+                        <th>Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>        
+            <!-- Sales end -->
+
+            <!-- Purchases begin-->
+            <div>
+                <h4>Purchases:</h4>            
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Date Bought</th>
+                        <th>Seller</th>
+                        <th>Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>        
+            <!-- Purchases end -->
+
+        </div>
+    </body>
+</html>

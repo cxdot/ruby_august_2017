@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><% title "Shoes" %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+    <body>
+        <div class="container">
+            <div>
+                <h4>Hi <%= @user.first_name %></h4>
+                <%= link_to "Go To Dashboard", action: "show", :controller=> "users", id: @user.id  %>
+                <a style="float: right;" href="/logout" data-method="delete">Logout</a>
+            </div>
+
+            <!-- All shoes for sale begin -->
+            <div>
+                <h5 style="text-align: center;">All products:</h5>            
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Seller</th>
+                        <th>Date Posted</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- All shoes for sale end-->
+        </div>
+    </body>
+</html>
