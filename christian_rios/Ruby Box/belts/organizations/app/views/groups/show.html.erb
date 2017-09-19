@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><% title "Groups" %></title>
+</head>
+    <body>
+        <div class="container">
+            <div>
+                <a href="/groups">Groups Dashboard</a>
+                <a href="/logout" data-method="delete">Logout</a>
+            </div>
+            
+            <div>
+                <h3><%= @group.name %></h3>
+                    <% unless @group.users.include? current_user %>
+                        <form action="/groups/<%= @group.id %>/user" method="post">
+                            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                            <button class="btn btn-primary" type="submit">Join</button>
+                        </form>
+                        <% else %>
+                            <form action="/groups/<%= @group.id %>/user" method="post">
+                                <input type="hidden" name="_method" value="delete" />
+                                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                                <button class="btn btn-danger">Leave</button>
+                            </form>
+                    <% end %>
+                <p><%= @group.description %></p>
+            </div>
+
+            <div>
+                <% if @group.user == current_user %>
+                    <h4>Created By: YOU</h4>
+                <% else %>
+                    <h4>Create By: <%= "#{@group.user.first_name} " "#{@group.user.last_name}"%></h4>
+                <% end %>
+
+                <p>Members</p>
+                <% if @group.users.empty? %>
+                    <h5>No one has joined your group yet.</h5>
+                <% else %>
+                    <% @group.users.each do |user| %>
+                        <ul>
+                            <li>
+                            <%= "#{user.first_name} " "#{user.last_name}" %>
+                            </li>
+                        </ul>
+                    <% end %>
+                <% end %>
+            </div>
+
+        </div>
+    </body>
+</html>

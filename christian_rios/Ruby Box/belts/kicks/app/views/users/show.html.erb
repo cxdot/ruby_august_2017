@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><% title "Your Dashboard" %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+    <body>
+        <div class="container">
+            <div>
+                <h4>Hi <%= @user.first_name %></h4>
+                <%= link_to "Go To All Products", shoes_path %>
+                <a style="float: right;" href="/logout" data-method="delete">Logout</a>
+            </div><p></p>
+            <!-- begin create shoe for sale-->
+            <div>
+                <p>Sell product:</p>
+                <form action="/shoes" class="form-horizontal" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" name="shoe[name]" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount:</label>
+                        <input type="integer" class="form-control" min="20" name="shoe[amount]" id="amount">
+                        <input type="hidden" class="form-control" name="shoe[user_id]" id="user_id" value="<%= @user.id %>">
+                    </div>
+                    <button type="submit" class="btn btn-default">Sell</button>
+                </form>
+            </div><p></p>
+            <!-- end create shoe for sale-->
+
+            <!-- Products not sold-->
+            <div class="row">
+                <h4>Your products that are not sold yet:</h4>            
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Date Posted</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @shoes.each do |shoe| %>
+                    <% unless shoe.sold == true %>
+                    <tr>
+                        <td><%= shoe.name %></td>
+                        <td><%= shoe.created_at.strftime("%m/%d/%Y %I:%M")  %></td>
+                        <td>$<%= shoe.amount %></td>
+                        <td>
+                        <form action="/shoes/<%= shoe.id %>" method="post">
+                            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                            <input type="hidden" name="_method" value="delete">
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                        </td>
+                    </tr>
+                    <% end %>
+                    <% end %>
+                    </tbody>
+                </table>
+            </div>        
+            <!-- Products not sold end-->
+
+            <!-- Sales begin-->
+            <div class="row">
+                <h4>Sales:</h4>            
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Date Bought</th>
+                        <th>Buyer</th>
+                        <th>Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @sold.each do |sold|  %>
+                    <tr>
+                        <td><%= sold.product %></td>
+                        <td><%= sold.purchased.try(:strftime, '%B %e, %Y %I:%M') %></td>
+                        <td><%= sold.buyer %></td>
+                        <td>$<%= sold.amount %></td>
+                    </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+                <p style="margin-left: 910px;"><strong>Total: $<%= @profit %></strong></p> 
+            </div>        
+            <!-- Sales end -->
+
+            <!-- Purchases begin-->
+            <div class="row">
+                <h4>Purchases:</h4>            
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Date Bought</th>
+                        <th>Seller</th>
+                        <th>Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @purchased.each do |p| %>
+                    <tr>
+                        <td><%= p.product %></td>
+                        <td><%= p.purchased.strftime("%m/%d/%Y %I:%M") %></td>
+                        <td><%= p.seller %></td>
+                        <td>$<%= p.amount %></td>
+                    </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+                <p style="margin-left: 910px;"><strong>Total: $<%= @spent %></strong></p>
+            </div>        
+            <!-- Purchases end -->
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,83 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><% title "Lenders Page" %></title>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <a href="/logout" data-method="delete">Logout</a>
+            <h5>Name: <%= "#{@creditor.first_name} " "#{@creditor.last_name}"%></h5>
+            <h5>Account Balance: $<%= @creditor.money %></h5>
+        </div>
+        <div>
+            <p>List of people in need of help:</p>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Need Money For</th>
+                    <th>Reason for Loan</th>
+                    <th>Amount Needed</th>
+                    <th>Amounted Raised</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @debitor.each do |d| %>
+                    <tr>
+                        <td><%= "#{d.first_name} " "#{d.last_name}"%></td>
+                        <td><%= d.reason %></td>
+                        <td><%= d.description %></td>
+                        <td><%= d.amount %></td>
+                        <td>$<%= d.raised %></td>
+                        <td>
+                        <% unless @creditor.money <= 0 %>
+                            <form action="/institutions/<%= d.id %>" method="post">
+                                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                                <input type="number" id="loan_amount" name="loan_amount" min="1" max="<%= @creditor.money %>">
+                                <button>Lend</button>
+                            </form>
+                        <% else%>
+                            <p>Insufficient Funds</p>
+                        <% end %>
+                        </td>
+                    </tr>
+                <% end %>
+  
+                </tbody>
+            </table>
+        </div>
+        <!-- Loaned to -->
+        <div>
+            <h4>List of people you loaned money to:</h4>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Need Money For</th>
+                    <th>Reason for Loan</th>
+                    <th>Amount Needed</th>
+                    <th>Amounted Raised</th>
+                    <th>Amount loaned</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @loans.each do |d| %>
+                    <tr>
+                        <td><%= "#{d.first_name} " "#{d.last_name}"%></td>
+                        <td><%= d.reason %></td>
+                        <td><%= d.description %></td>
+                        <td>$<%= d.amount %></td>
+                        <td>$<%= d.raised %></td>
+                        <td><%= d.total_loan %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><% title "Shoes" %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+    <body>
+        <div class="container">
+            <div>
+                <h4>Hi <%= @user.first_name %></h4>
+                <%= link_to "Go To Dashboard", action: "show", :controller=> "users", id: @user.id  %>
+                <a style="float: right;" href="/logout" data-method="delete">Logout</a>
+            </div>
+
+            <!-- All shoes for sale begin -->
+            <div>
+                <h5 style="text-align: center;">All products:</h5>            
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Seller</th>
+                        <th>Date Posted</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @kickz.each do |shoes| %>
+                    <% if shoes.sold != true %>
+                    <tr>
+                        <td><%= shoes.name %></td>
+                        <td><%= shoes.user.first_name %></td>
+                        <td><%= shoes.created_at.strftime("%m/%d/%Y %I:%M") %></td>
+                        <td>$<%= shoes.amount %></td>
+                        <% if shoes.user_id != @user.id %>
+                        <td>
+                        <form action="/buy/<%= shoes.id %>" method="post">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                        <input type="hidden" name="user_id" value="<%= shoes.user.id %>">
+                        <input type="hidden" name="amount" value="<%= shoes.amount %>">
+                        <input type="hidden" name="shoe_name" value="<%= shoes.name %>">
+                        <button type="submit" class="btn btn-default">Buy</button>
+                        </form>
+                        </td>
+                        <% else %>
+                            <td><button class="btn btn-default" disabled>Buy</button></td>
+                        <% end %>   
+                    </tr>
+                    <% end %>
+                    <% end %>
+                    </tbody>
+                </table>
+            </div>
+            <!-- All shoes for sale end-->
+        </div>
+    </body>
+</html>

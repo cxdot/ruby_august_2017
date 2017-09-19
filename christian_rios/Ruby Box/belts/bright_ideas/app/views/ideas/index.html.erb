@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><% title "Ideas" %></title>
+</head>
+<body>
+    <div class="container">
+    <!-- Begin header-->
+        <h4>Hi <%= @user.name %>!</h4>
+        <a href="/logout" data-method="delete">Logout</a>
+    <!-- End header -->
+
+        <!--Begin Post Action for Ideas -->
+        <div class="form-group">
+            <form action="/ideas" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                <textarea class="form-control" rows="5" name="idea[content]" id="content" placeholder="Post something witty here..."></textarea>
+                <button type="submit" class="btn btn-default">Idea</button>
+            </form>
+        </div>
+        <!-- End Post Action for Ideas-->
+
+        <!--Begin Ideas -->
+        <% @ideas.each do |i| %>
+            <p><a href="/users/<%= i.user.id %>"> <%= i.user.name %></a> says:</p>
+            <p style="border: 1px solid"> <%= i.content %>
+                <% unless i.user.id != current_user.id %>
+                <form action="/ideas/<%= i.id %>" method="post">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit" class="btn btn-danger">&#9746;</button>
+                </form>
+                <% end %>
+            </p>
+            <!-- Being action likes-->
+            <p>
+                <form action="/likes" method="post">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                    <input type="hidden" name="like_id" value="<%= i.id %>">
+                    <button type="submit" class="btn btn-success">Like</button>
+                </form>
+                <a href="/ideas/<%= i.id %>"><%= i.liked_by.count %> people</a> like this
+            </p>
+            <!-- End action likes-->
+            <hr>
+        <% end %>
+        <!-- End Ideas -->
+    </div>
+</body>
+</html>
