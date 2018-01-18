@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+    <%= link_to 'Christian\'s Blog', root_path, class: 'navbar-brand '%>
+      <p class="navbar-text navbar-right">
+        <% if user_signed_in? %>
+        <%= link_to 'New Post', new_post_path, class: 'navbar-link' %>
+        <% else %>
+        <%= link_to 'Admin Login', new_user_session_path, class: 'navbar-link' %>
+        <% end %>
+      </p>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="col-md-10 col-md-offset-1">
+      <%= yield %>
+    </div>
+  </div>
+
+</body>
+</html>

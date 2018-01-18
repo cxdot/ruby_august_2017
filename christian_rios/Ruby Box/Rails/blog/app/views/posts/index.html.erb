@@ -1,0 +1,16 @@
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <% @posts.each do |post| %>
+  <div class="row">
+    <%# POST TITLE  %>
+    <div class="col-md-8">
+      <h3><%= link_to post.title, post %></h3>
+    </div>
+    <%# POSTED AT TIME %>
+    <div class="col-md-4">
+      <p class="posted-at" align="right">Posted <%= time_ago_in_words(post.created_at) %> ago</p>
+    </div>
+  </div>
+  <% end %>
+</div>
+
