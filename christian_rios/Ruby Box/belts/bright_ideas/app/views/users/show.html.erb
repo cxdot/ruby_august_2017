@@ -1,0 +1,21 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <% title "User Profile" %>
+</head>
+<body>
+    <div class="container">
+        <a href="/ideas" >Bright Ideas</a>
+        <a href="/logout" data-method="delete">Logout</a>
+
+        <p>Name: <%= @user.name %></p>
+        <p>Alias: <%= @user.alias %></p>
+        <p>Email: <%= @user.email %></p>
+        <hr>
+        <p>Total Number of Posts: <%= @user.ideas.count %></p>
+        <p>Total Number of Likes: <%= @user.likes.count %></p>
+    </div>
+</body>
+</html>
